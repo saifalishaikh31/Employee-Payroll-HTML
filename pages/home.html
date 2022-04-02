@@ -18,11 +18,12 @@
             </div>
         </header>
         <div class="form-content">
-            <form class="form" action="#" onsubmit="save(); false">
+            <form class="form" action="#" onsubmit="save(event); false">
                 <div class="form-head">Employee Payroll Form</div>
                 <div class="row-content">
                     <label class="label text" for="name">Name</label>
                     <input class="input" type="text" id="name" name="name" placeholder="Your name.." required>
+                    <error-output class="text-error" for="name" style="color: red;"></error-output>  
                 </div>
                 <div class="row-content">
                     <label class="label text" for="profile">Profile Image</label>
@@ -140,7 +141,7 @@
                         <textarea class="input" name="Notes" id="notes" placeholder="" style="height: 100px"></textarea>
                     </div>
                     <div class="buttonParent">
-                        <a href="./form.html" class="resetButton button cancelButton">Cancel</a>
+                        <a href="../pages/home.html" class="resetButton button cancelButton">Cancel</a>
                         <div class="submit-reset">
                             <button type="submit" class="button submitButton" id="submitButton">Submit</button>
                             <button type="reset" class="resetButton button">Reset</button>
@@ -149,6 +150,14 @@
             </form>
         </div>
         <script>
+                const text = document.querySelector('#name');
+        const textError = document.querySelector('.text-error');
+        text.addEventListener('input',function(){
+            let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
+            if(nameRegex.test(text.value))
+                textError.textContent = "";
+            else textError.textContent= "*Name is Incorrect";
+        });
             const salary = document.querySelector('#salary');
             const output = document.querySelector('.salary-output');
             output.textContent = salary.value;
@@ -156,5 +165,7 @@
                 output.textContent = salary.value;
             });
         </script>
+        <script src="../js/EmployeePayrollData.js"></script>
+        
     </body>
 </html>
